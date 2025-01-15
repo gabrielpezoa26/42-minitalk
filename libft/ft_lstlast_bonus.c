@@ -1,12 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 18:52:52 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/15 16:28:25 by gabriel          ###   ########.fr       */
+/*   Created: 2024/12/04 10:07:47 by gcesar-n          #+#    #+#             */
+/*   Updated: 2024/12/05 14:19:30 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+t_list	*ft_last(t_list *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst != NULL)
+	{
+		if (lst->next == NULL)
+		lst = lst->next;
+	}
+	return (lst);
+}
