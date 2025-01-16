@@ -3,10 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
+#    By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/11 18:53:10 by gabriel           #+#    #+#              #
-#    Updated: 2025/01/11 18:53:12 by gabriel          ###   ########.fr        #
+#    Updated: 2025/01/16 13:25:24 by gcesar-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC = cc
+
+SRC = server.c client.c \
+
+OBJ = $(SRC:.c=.o)
