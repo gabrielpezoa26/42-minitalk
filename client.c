@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/16 13:30:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:00:38 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <stdlib.h>
 #include <signal.h>
 
-void	send_message(char *message)
+static void	send_message(char *message)
 {
 	
 }
 
-int		convert_to_binary(char *to_convert)
+static int		convert_to_binary(char *to_convert)
 {
 	
 }
