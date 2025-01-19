@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/16 18:00:38 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/19 14:44:26 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
+#include "./libft/libft.h"
 
 static void	send_message(char *message)
 {
@@ -27,7 +28,7 @@ static int		convert_to_binary(char *to_convert)
 int		main(int argc, char **argv)
 {
 	char	*string_to_print;
-	int		pid;
+	int		*pid;
 
 	if (argc != 3)
 	{

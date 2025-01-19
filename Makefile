@@ -3,39 +3,40 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+         #
+#    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/11 18:53:10 by gabriel           #+#    #+#              #
-#    Updated: 2025/01/16 17:45:15 by gcesar-n         ###   ########.fr        #
+#    Updated: 2025/01/19 14:43:41 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+SRC = server.c client.c
+OBJECTS = $(SRC:.c=.o)
+
 CC = cc
 
-SRC = server.c client.c
 
-CFLAGS = -Wall -Wextra -Werror
+all: server client
 
-INCLUDES	= -I ./libft
+bonus: server client
 
-LIBFT_DIR	= ./libft
-LIBFT		= $(LIBFT_DIR)/libft.a
+server: server.o libft
+	$(CC) -o $@ $< -Llibft
 
-OBJ = $(SRC:.c=.o)
+client: client.o libft
+	$(CC) -o $@ $< -Llibft
 
-client:
+%.o: %.c
+	$(CC) -c $(CFLAGS) $?
 
-server:
-
-
-
-all: $(NAME)
+libft:
+	make -C libft
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJECTS)
+	make -C libft clean
+	
+fclean: clean
+	rm -f server client libft/libft.a
 
-fclean:
-	rm -f $(NAME)
-
-re:
-	fclean all
+re: fclean all
