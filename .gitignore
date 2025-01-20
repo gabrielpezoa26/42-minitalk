@@ -1,3 +1,5 @@
 a.out
 *.o
 *.d
+server
+client

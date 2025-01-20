@@ -6,12 +6,10 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/20 12:42:25 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/20 13:09:12 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include <signal.h>
 #include <sys/types.h>
 #include "./libft/libft.h"
@@ -45,13 +43,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		write(1, "Usage: ./client <server_pid> <message>\n", 39);
+		ft_printf("Usage: ./client <server_pid> <message>\n");
 		return (1);
 	}
 	server_pid = (pid_t)ft_atoi(argv[1]);
 	if (server_pid <= 0)
 	{
-		write(1, "Invalid PID.\n", 13);
+		ft_printf("Invalid PID.\n");
 		return (1);
 	}
 	message = argv[2];
