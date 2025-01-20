@@ -6,7 +6,7 @@
 #    By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/11 18:53:10 by gabriel           #+#    #+#              #
-#    Updated: 2025/01/19 14:43:41 by gabriel          ###   ########.fr        #
+#    Updated: 2025/01/20 12:25:15 by gabriel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,29 +14,28 @@ SRC = server.c client.c
 OBJECTS = $(SRC:.c=.o)
 
 CC = cc
-
+CFLAGS = -Wall -Wextra -Werror
 
 all: server client
 
-bonus: server client
+server: server.o libft/libft.a
+	$(CC) $(CFLAGS) -o server server.o -Llibft -lft
 
-server: server.o libft
-	$(CC) -o $@ $< -Llibft
-
-client: client.o libft
-	$(CC) -o $@ $< -Llibft
+client: client.o libft/libft.a
+	$(CC) $(CFLAGS) -o client client.o -Llibft -lft
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $?
+	$(CC) $(CFLAGS) -c $< -o $@
 
-libft:
+libft/libft.a:
 	make -C libft
 
 clean:
 	rm -f $(OBJECTS)
 	make -C libft clean
-	
+
 fclean: clean
-	rm -f server client libft/libft.a
+	rm -f server client
+	make -C libft fclean
 
 re: fclean all
