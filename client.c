@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/20 15:48:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/21 14:48:44 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <sys/types.h>
-#include "./libft/libft.h"
+#include "minitalk.h"
 
 static void	send_message(pid_t server_pid, char *message)
 {
@@ -29,7 +27,7 @@ static void	send_message(pid_t server_pid, char *message)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
-			usleep(300);
+			usleep(1000);
 			bit_index--;
 		}
 		message++;
@@ -43,7 +41,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		ft_printf("Usage: ./client <server_pid> <message>\n");
+		ft_printf("Format: ./client <server_pid> <message>\n");
 		return (1);
 	}
 	server_pid = (pid_t)ft_atoi(argv[1]);
