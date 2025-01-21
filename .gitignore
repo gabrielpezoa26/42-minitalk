@@ -3,3 +3,4 @@ a.out
 *.d
 server
 client
+.vscode/
