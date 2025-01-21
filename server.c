@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:52 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/20 21:24:07 by gabriel          ###   ########.fr       */
+/*   Updated: 2025/01/20 21:52:16 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@
 
 static void	signal_handler(int sig)
 {
-	static int	bit_index;
+	static int	bit_count;
 	static char	current_char;
 
-	if (bit_index == 0 && current_char == 0)
+	if (bit_count == 0 && current_char == 0)
 	{
-		bit_index = 0;
+		bit_count = 0;
 		current_char = 0;
 	}
 	if (sig == SIGUSR1)
-		current_char |= (1 << (7 - bit_index));
-	bit_index++;
-	if (bit_index == 8)
+		current_char |= (1 << (7 - bit_count));
+	bit_count++;
+	if (bit_count == 8)
 	{
-		if (current_char == '\0')
-			ft_printf("\n");
-		else
-			ft_printf("%c", current_char);
-		bit_index = 0;
+		// if (current_char == '\0')
+		// 	ft_printf("\n");
+		// else
+		ft_printf("%c", current_char);
+		bit_count = 0;
 		current_char = 0;
 	}
 }
