@@ -6,11 +6,13 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/21 14:48:44 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:18:28 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+//static int	g_flag = 0;
 
 static void	send_message(pid_t server_pid, char *message)
 {
