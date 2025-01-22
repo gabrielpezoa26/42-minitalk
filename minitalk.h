@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:47:32 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/01/21 14:50:01 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:18:41 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINITALK_H
 
 # include <signal.h>
-# include <sys/types.h>
+# include <stdlib.h>
 # include "./libft/libft.h"
 
 typedef struct potato

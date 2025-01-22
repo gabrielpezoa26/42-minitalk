@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:52 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/21 21:00:14 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:39:49 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,75 @@
 
 static t_message	g_to_print = {0, 0};
 
-static void	handle_signal_update(int sig, int *bit_count, char *current_char)
+static void	ft_build_msg(void)
 {
-	if (sig == SIGUSR1)
-		*current_char |= (1 << (7 - *bit_count));
-	(*bit_count)++;
-	if (*bit_count == 8)
+	char	*temp;
+	char	c;
+
+	temp = NULL;
+	c = (char)g_to_print.c;
+	if (g_to_print.msg)
 	{
-		if (*current_char == '\0')
-			ft_printf("\n");
-		else
-			ft_printf("%c", *current_char);
-		*bit_count = 0;
-		*current_char = 0;
+		temp = ft_strjoin(g_to_print.msg, &c);
+		free(g_to_print.msg);
 	}
+	else
+	{
+		temp = ft_strdup(&c);
+	}
+	if (!temp)
+		exit(EXIT_FAILURE);
+	g_to_print.msg = temp;
 }
 
-static void	signal_handler(int sig)
+static void	ft_print_character(void)
+{
+	if (g_to_print.c == '\0')
+	{
+		if (g_to_print.msg)
+			ft_printf("%s\n", g_to_print.msg);
+		else
+			ft_printf("\n");
+		free(g_to_print.msg);
+		g_to_print.msg = NULL;
+	}
+	else
+		ft_build_msg();
+	g_to_print.c = 0;
+}
+
+static void	ft_handle_signal(int signal, siginfo_t *info, void *context)
 {
 	static int	bit_count = 0;
-	static char	current_char = 0;
 
-	handle_signal_update(sig, &bit_count, &current_char);
+	(void)context;
+	if (signal == SIGUSR1)
+		g_to_print.c = (g_to_print.c << 1) | 1;
+	else if (signal == SIGUSR2)
+		g_to_print.c = (g_to_print.c << 1);
+	bit_count++;
+	if (bit_count == 8)
+	{
+		ft_print_character();
+		bit_count = 0;
+	}
+	if (kill(info->si_pid, SIGUSR1) == -1)
+		exit(EXIT_FAILURE);
 }
 
 int	main(void)
 {
-	pid_t	pid;
+	struct sigaction	sa;
 
-	pid = getpid();
-	ft_printf("Server PID: %d\n", pid);
-	signal(SIGUSR1, signal_handler);
-	signal(SIGUSR2, signal_handler);
+	ft_printf("Server PID: %d\n", getpid());
+	sa.sa_sigaction = ft_handle_signal;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
+	{
 		pause();
+	}
 	return (0);
 }

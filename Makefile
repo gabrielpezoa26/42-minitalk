@@ -6,7 +6,7 @@
 #    By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/11 18:53:10 by gabriel           #+#    #+#              #
-#    Updated: 2025/01/21 21:00:30 by gcesar-n         ###   ########.fr        #
+#    Updated: 2025/01/22 15:09:36 by gcesar-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC = server.c client.c
 OBJECTS = $(SRC:.c=.o)
 
 CC = cc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 all: server client
 

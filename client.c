@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/21 21:00:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:40:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,53 @@
 
 static int	g_flag = 0;
 
-static void	send_message(pid_t server_pid, char *message)
+static void	ack_signal(int signal)
 {
-	char	current_char;
-	int		bit_index;
+	if (signal == SIGUSR1)
+		g_flag = 1;
+}
 
-	while (*message)
+static void	send_message(unsigned int server_pid, char *message, size_t len)
+{
+	int		potato;
+	size_t	i;
+
+	i = 0;
+	while (i < len)
 	{
-		current_char = *message;
-		bit_index = 7;
-		while (bit_index >= 0)
+		potato = 0;
+		while (potato < 8)
 		{
-			if ((current_char >> bit_index) & 1)
+			if ((message[i] >> (7 - potato)) & 1)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
+			potato++;
 			usleep(1000);
-			bit_index--;
+			while (!g_flag)
+				pause();
+			g_flag = 0;
 		}
-		message++;
+		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	pid_t	server_pid;
-	char	*message;
+	unsigned int	server_pid;
 
 	if (argc != 3)
 	{
 		ft_printf("Format: ./client <server_pid> <message>\n");
 		return (1);
 	}
-	server_pid = (pid_t)ft_atoi(argv[1]);
+	server_pid = ft_atoi(argv[1]);
 	if (server_pid <= 0)
 	{
 		ft_printf("Invalid PID.\n");
 		return (1);
 	}
-	message = argv[2];
-	send_message(server_pid, message);
+	signal(SIGUSR1, ack_signal);
+	send_message(server_pid, argv[2], ft_strlen(argv[2]) + 1);
 	return (0);
 }
