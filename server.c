@@ -6,13 +6,13 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:52 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/21 15:18:20 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:00:14 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-//static t_message	g_to_print = {0, 0};
+static t_message	g_to_print = {0, 0};
 
 static void	handle_signal_update(int sig, int *bit_count, char *current_char)
 {
