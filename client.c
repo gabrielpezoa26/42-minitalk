@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/26 12:31:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:57:29 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ static void	ack_signal(int signal)
 
 static void	send_message(unsigned int server_pid, char *message, size_t len)
 {
-	int		potato;
+	int		bit_index;
 	size_t	i;
 
 	i = 0;
 	while (i < len)
 	{
-		potato = 0;
-		while (potato < 8)
+		bit_index = 0;
+		while (bit_index < 8)
 		{
-			if ((message[i] >> (7 - potato)) & 1)
+			if ((message[i] >> (7 - bit_index)) & 1)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
-			potato++;
+			bit_index++;
 			usleep(1000);
 			while (!g_flag)
 				pause();
