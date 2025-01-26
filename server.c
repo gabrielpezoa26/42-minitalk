@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:52 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/22 15:39:49 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:40:48 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_message	g_to_print = {0, 0};
 
-static void	ft_build_msg(void)
+static void	ft_assemble_msg(void)
 {
 	char	*temp;
 	char	c;
@@ -27,9 +27,7 @@ static void	ft_build_msg(void)
 		free(g_to_print.msg);
 	}
 	else
-	{
 		temp = ft_strdup(&c);
-	}
 	if (!temp)
 		exit(EXIT_FAILURE);
 	g_to_print.msg = temp;
@@ -47,7 +45,7 @@ static void	ft_print_character(void)
 		g_to_print.msg = NULL;
 	}
 	else
-		ft_build_msg();
+		ft_assemble_msg();
 	g_to_print.c = 0;
 }
 
@@ -86,3 +84,13 @@ int	main(void)
 	}
 	return (0);
 }
+
+/*
+	build_msg - >> monta a msg char por char, cuida da memoria ()
+
+	print_char ->> printa qdo a msg foi inteiramente recebida
+
+	handle_signal - >> 
+
+	main ->> pega e imprime o PID;  chama as funçoes
+*/

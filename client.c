@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:52:45 by gabriel           #+#    #+#             */
-/*   Updated: 2025/01/22 15:40:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:31:51 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,11 @@ int	main(int argc, char **argv)
 	send_message(server_pid, argv[2], ft_strlen(argv[2]) + 1);
 	return (0);
 }
+
+/*
+	ack_signal ->> pega o sinal do servidor avisando q parte da msg chegou
+	
+	send_message - >> manda a msg char por char, (convertendo), espera o aviso do server; 
+
+	main - >> trata erro de formatação e PID, chama a func de mandar msg
+*/
