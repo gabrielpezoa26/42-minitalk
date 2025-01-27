@@ -6,12 +6,12 @@
 #    By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/11 18:53:10 by gabriel           #+#    #+#              #
-#    Updated: 2025/01/22 17:14:52 by gcesar-n         ###   ########.fr        #
+#    Updated: 2025/01/27 15:53:10 by gcesar-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = server.c client.c
-OBJECTS = $(SRC:.c=.o)
+OBJECTS = server.o client.o
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -24,8 +24,11 @@ server: server.o libft/libft.a
 client: client.o libft/libft.a
 	$(CC) $(CFLAGS) -o client client.o -Llibft -lft
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+server.o: server.c
+	$(CC) $(CFLAGS) -c server.c -o server.o
+
+client.o: client.c
+	$(CC) $(CFLAGS) -c client.c -o client.o
 
 libft/libft.a:
 	make -C libft
